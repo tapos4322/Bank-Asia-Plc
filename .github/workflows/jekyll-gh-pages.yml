@@ -1,0 +1,212 @@
+# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Asia Account Print</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #3a3f92;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .form-section, .template-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 48%;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            border: none;
+            background: #3a3f92;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .template {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            background: #fff;
+        }
+        .template h3 {
+            text-align: center;
+        }
+        .template img {
+            height: 50px;
+        }
+        .account-info {
+            margin-top: 10px;
+        }
+        .account-info label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Account Print</a>
+            <a href="#">Remittance Calculation</a>
+            <a href="#">DPS Calculation</a>
+            <a href="#">FDR Calculation</a>
+            <a href="#">Loan Calculation</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div>📅 May 30, 2025</div>
+    </header>
+
+    <div class="container">
+        <div class="form-section">
+            <h2>Generate Account Details Print</h2>
+            <input type="text" id="accountNumber" placeholder="Account Number">
+            <input type="text" id="accountName" placeholder="Account Name">
+            <input type="text" id="mobileNumber" placeholder="Mobile Number">
+            <button onclick="fillTemplates()">Submit</button>
+            <button onclick="window.print()">Print 🖨️</button>
+        </div>
+
+        <div class="template-section">
+            <h2>Select Template for Printing</h2>
+            <button onclick="showTemplate(1)">Print Template One (1)</button>
+            <button onclick="showTemplate(2)">Print Template Two (2)</button>
+            <button onclick="showTemplate(3)">Print Template Three (3)</button>
+            <button onclick="showTemplate(4)">Print Template Four (4)</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="template" id="template1">
+            <h3>Template One (1)</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Bank_Asia_Logo.svg/2560px-Bank_Asia_Logo.svg.png" alt="Bank Asia Logo">
+            <div class="account-info">
+                <p><label>Account Name:</label> <span id="t1Name"></span></p>
+                <p><label>Account Number:</label> <span id="t1Number"></span></p>
+                <p><label>Account Mobile No:</label> <span id="t1Mobile"></span></p>
+                <p><strong>Branch Name:</strong> Agent Banking</p>
+                <p><strong>Routing Number:</strong> 070270602</p>
+                <p><strong>Swift Code:</strong> BALBDDH</p>
+            </div>
+        </div>
+
+        <div class="template" id="template3">
+            <h3>Template Three (3)</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Bank_Asia_Logo.svg/2560px-Bank_Asia_Logo.svg.png" alt="Bank Asia Logo">
+            <div class="account-info">
+                <p><label>AC Name:</label> <span id="t3Name"></span></p>
+                <p><label>AC Number:</label> <span id="t3Number"></span></p>
+                <p><label>Mobile Number:</label> <span id="t3Mobile"></span></p>
+                <p><strong>Branch Name:</strong> Agent Banking</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fillTemplates() {
+            const name = document.getElementById('accountName').value;
+            const number = document.getElementById('accountNumber').value;
+            const mobile = document.getElementById('mobileNumber').value;
+
+            document.getElementById('t1Name').textContent = name;
+            document.getElementById('t1Number').textContent = number;
+            document.getElementById('t1Mobile').textContent = mobile;
+
+            document.getElementById('t3Name').textContent = name;
+            document.getElementById('t3Number').textContent = number;
+            document.getElementById('t3Mobile').textContent = mobile;
+        }
+
+        function showTemplate(templateNum) {
+            document.querySelectorAll('.template').forEach(el => el.style.display = 'none');
+            document.getElementById('template' + templateNum).style.display = 'block';
+        }
+
+        // Initialize templates visibility
+        showTemplate(1);
+    </script>
+</body>
+</html>
+
+        uses: actions/deploy-pages@v4
